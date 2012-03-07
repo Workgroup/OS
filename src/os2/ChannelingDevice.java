@@ -2,8 +2,6 @@ package os2;
 
 public class ChannelingDevice {
     Register ch = new Register("CH", 1, new int[]{0});
-    RAM ram = new RAM();
-    HDD hdd = new HDD();
     boolean[][] interupt;
     
     ChannelingDevice() {
@@ -32,11 +30,11 @@ public class ChannelingDevice {
     public void write(int[] value, int x, int y) {
         switch (getChannel()){
 /*HDD*/     case 3: {
-                hdd.words[x * 16 + y] = value;
+                OS2.hdd.words[x * 16 + y] = value;
                 break;
             }
 /*RAM*/     case 4: {
-                ram.words[x * 16 + y] = value;
+                OS2.ram.words[x * 16 + y] = value;
                 break;
             }
             default: {
@@ -52,7 +50,7 @@ public class ChannelingDevice {
             }
             default: {
                 interupt[CPU.PROGRAM_INT][CPU.NON_EXIST_CODE] = true;
-                return CPU.registers.get(CPU.R).getValue();
+                return OS2.cpu.registers.get(CPU.R).getValue();
             }
         }
     }
@@ -60,14 +58,14 @@ public class ChannelingDevice {
     public int[] read(int x, int y){
         switch (getChannel()){
 /*HDD*/     case 3: {
-                return hdd.words[x * 16 + y];
+                return OS2.hdd.words[x * 16 + y];
             }
 /*RAM*/     case 4: {
-                return ram.words[x * 16 + y];
+                return OS2.ram.words[x * 16 + y];
             }
             default: {
                 interupt[CPU.PROGRAM_INT][CPU.NON_EXIST_CODE] = true;
-               return CPU.registers.get(CPU.R).getValue();
+               return OS2.cpu.registers.get(CPU.R).getValue();
             }
         }     
     }

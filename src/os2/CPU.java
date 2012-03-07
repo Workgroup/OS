@@ -32,7 +32,7 @@ public class CPU {
     static final int HDD_ERR = 2;
     static final int OUT_OF_TIME = 0;
     
-    public static ArrayList<Register> registers = new ArrayList<Register>();    
+    public ArrayList<Register> registers = new ArrayList<Register>();    
     public ChannelingDevice channelingDevice = new ChannelingDevice();
     
     public CPU(){    

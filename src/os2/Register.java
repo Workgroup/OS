@@ -2,8 +2,6 @@ package os2;
 
 public class Register {
     
-    // testing a github push
-    
     private String name;
     private int size;
     private int[] value;
@@ -58,9 +56,17 @@ public class Register {
         return number;
     }
     
-    public int setNumber(){
-        int number;
-        number = value[3]+(value[2]*256)+(value[1]*65536)+(value[0]*16777216);
-        return number;
+    public void setNumber(int number){
+        int i;
+        i = number / 16777216;
+        number = number - (i*16777216);
+        value[0] = i;
+        i = number / 65536;
+        number = number -(i*65536);
+        value[1] = i;
+        i = number / 256;
+        number = number - (i*256);
+        value[2] = i;
+        value[3] = number;
     }
 }
