@@ -15,5 +15,9 @@ public class VirtualMachine {
         virtualRegisters.add(new Register("SP", 2, new int[]{0, 0}));
     }
     
+<<<<<<< HEAD
+    //komentaras1
+=======
     // komentaras 2
+>>>>>>> b2786c562732b451fa223f0d664006c881baa2b2
 }
