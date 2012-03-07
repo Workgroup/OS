@@ -3,7 +3,7 @@ package os2;
 import java.util.ArrayList;
 
 public class CPU {
-    
+
     static final int PTR = 0;
     static final int PTT = 1;
     static final int IR = 2;
