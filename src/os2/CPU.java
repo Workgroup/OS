@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class CPU {
     
+    // Default values
+    
     static final int PTR = 0;
     static final int PTT = 1;
     static final int IR = 2;
