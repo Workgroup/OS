@@ -4,5 +4,6 @@ public class OS2 {
     
     public static void main(String[] args) {
         RAM R = new RAM();
+        CPU cpu = new CPU();
     }
 }
