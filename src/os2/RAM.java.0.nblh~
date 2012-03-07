@@ -1,0 +1,24 @@
+package os2;
+
+import java.util.ArrayList;
+
+public class RAM {
+    
+    int supervisorMemorySize = 511;
+    int userMemorySize = 255;
+    int wordSize = 3;
+    int[][] words;
+    
+    public RAM(){
+        int allMemorySize = supervisorMemorySize + userMemorySize;
+        words = new int[allMemorySize][wordSize];
+        for (int i = 0; i<=allMemorySize; i++){
+            for (int j = 0; j<wordSize; j++){
+                System.out.println(j);
+                words[i][j] = 5;
+            }
+        }
+        System.out.println(words[20][3]);
+      
+    }
+}
