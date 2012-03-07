@@ -20,7 +20,9 @@ public class ChannelingDevice {
     
     public void write(int[] value) {
         switch (getChannel()){
-/*Input*/   case 1: break;
+/*Output*/   case 2:  {
+                break;
+            }
             default: {
                 interupt[CPU.PROGRAM_INT][CPU.NON_EXIST_CODE] = true;
             }
@@ -50,7 +52,7 @@ public class ChannelingDevice {
             }
             default: {
                 interupt[CPU.PROGRAM_INT][CPU.NON_EXIST_CODE] = true;
-                return new int[]{0, 0, 0, 0};
+                return CPU.registers.get(CPU.R).getValue();
             }
         }
     }
@@ -65,7 +67,7 @@ public class ChannelingDevice {
             }
             default: {
                 interupt[CPU.PROGRAM_INT][CPU.NON_EXIST_CODE] = true;
-                return new int[]{0, 0, 0, 0};
+               return CPU.registers.get(CPU.R).getValue();
             }
         }     
     }
