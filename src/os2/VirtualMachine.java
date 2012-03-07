@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 public class VirtualMachine {
     
+    static final int V_IR = 0;
+    static final int V_SF = 1;
+    static final int V_DF = 2;
+    static final int V_IP = 3;
+    static final int V_R = 4;
+    static final int V_SP = 5;
+    
     public ArrayList<Register> virtualRegisters = new ArrayList<Register>();
     
     public VirtualMachine(){
@@ -15,9 +22,17 @@ public class VirtualMachine {
         virtualRegisters.add(new Register("SP", 2, new int[]{0, 0}));
     }
     
-<<<<<<< HEAD
-    //komentaras1
-=======
-    // komentaras 2
->>>>>>> b2786c562732b451fa223f0d664006c881baa2b2
+    public void push(){
+        int address = ((virtualRegisters.get(V_SP).getValue()[0])*16)+ virtualRegisters.get(V_SP).getValue()[1];
+        RAM.words[address] = virtualRegisters.get(V_R).getValue();
+        virtualRegisters.get(V_SP).setValue(virtualRegisters.get(V_SP).getValue());
+    }
+    
+    public void pop(){
+        
+    }
+    
+    public void doAddition(){
+        
+    }
 }

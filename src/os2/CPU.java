@@ -127,18 +127,5 @@ public class CPU {
         registers.get(SP).setValue(registers.get(SP).getDefaultValue());
         registers.get(PTT).setValue(registers.get(PTT).getDefaultValue());
     }
-    
-//    private Register getRegister(String name) {
-//        Register element = null;
-//        Iterator itr = registers.iterator(); 
-//        
-//        while(itr.hasNext()) {
-//            element = (Register) itr.next(); 
-//            
-//            if (element.getName().equals(name)) {
-//                break;
-//            }
-//        }
-//        return element;
-//    }
+
 }

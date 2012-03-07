@@ -7,7 +7,7 @@ public class RAM {
     int supervisorMemorySize = 256;
     int userMemorySize = 255;
     int wordSize = 4;
-    int[][] words;
+    static int[][] words;
     
     public RAM(){
         int allMemorySize = supervisorMemorySize + userMemorySize;

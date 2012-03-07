@@ -51,5 +51,16 @@ public class Register {
     public void setValue(int[] value) {
         this.value = value;
     }
-        
+    
+    public int getNumber(){
+        int number;
+        number = value[3]+(value[2]*256)+(value[1]*65536)+(value[0]*16777216);
+        return number;
+    }
+    
+    public int setNumber(){
+        int number;
+        number = value[3]+(value[2]*256)+(value[1]*65536)+(value[0]*16777216);
+        return number;
+    }
 }
