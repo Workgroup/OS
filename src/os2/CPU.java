@@ -1,6 +1,7 @@
 package os2;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 public class CPU {
 
@@ -17,7 +18,7 @@ public class CPU {
     static final int SI = 10;
     static final int TI = 11;
     static final int TIME = 12;
-    
+        
     static final int INTERUPT_TYPE = 3;
     static final int PROGRAM_INT = 0;
     static final int SYSTEM_INT = 1;
@@ -34,7 +35,7 @@ public class CPU {
     static final int OUT_OF_TIME = 0;
     
     public static ArrayList<Register> registers = new ArrayList<Register>();    
-    public ChannelingDevice channelingDevice;
+    public ChannelingDevice channelingDevice = new ChannelingDevice();
     
     public CPU(){    
         registers.add(new Register("PTR", 2, new int[]{18, 1}));
@@ -126,4 +127,18 @@ public class CPU {
         registers.get(SP).setValue(registers.get(SP).getDefaultValue());
         registers.get(PTT).setValue(registers.get(PTT).getDefaultValue());
     }
+    
+//    private Register getRegister(String name) {
+//        Register element = null;
+//        Iterator itr = registers.iterator(); 
+//        
+//        while(itr.hasNext()) {
+//            element = (Register) itr.next(); 
+//            
+//            if (element.getName().equals(name)) {
+//                break;
+//            }
+//        }
+//        return element;
+//    }
 }
