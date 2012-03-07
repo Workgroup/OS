@@ -1,10 +1,8 @@
 package os2;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class CPU {
-
     static final int PTR = 0;
     static final int PTT = 1;
     static final int IR = 2;
@@ -127,5 +125,8 @@ public class CPU {
         registers.get(SP).setValue(registers.get(SP).getDefaultValue());
         registers.get(PTT).setValue(registers.get(PTT).getDefaultValue());
     }
+<<<<<<< HEAD
 
+=======
+>>>>>>> ecf81ee1382aa22775d073f826670128554d5790
 }

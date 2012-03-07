@@ -21,6 +21,7 @@ public class VirtualMachine {
         virtualRegisters.add(new Register("R", 4, new int[]{0, 0, 0, 0}));
         virtualRegisters.add(new Register("SP", 2, new int[]{0, 0}));
     }
+<<<<<<< HEAD
     
     public void push(){
         int address = ((virtualRegisters.get(V_SP).getValue()[0])*16)+ virtualRegisters.get(V_SP).getValue()[1];
@@ -36,3 +37,6 @@ public class VirtualMachine {
         
     }
 }
+=======
+}
+>>>>>>> ecf81ee1382aa22775d073f826670128554d5790
