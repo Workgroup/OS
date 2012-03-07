@@ -11,35 +11,51 @@ public class VirtualMachine {
     static final int V_R = 4;
     static final int V_SP = 5;
     
-    public ArrayList<Register> virtualRegisters = new ArrayList<Register>();
+    public ArrayList<Register> vRegisters = new ArrayList<Register>();
     
     public VirtualMachine(){
-        virtualRegisters.add(new Register("IR", 2, new int[]{0, 0}));
-        virtualRegisters.add(new Register("SF", 1, new int[]{0}));
-        virtualRegisters.add(new Register("DF", 1, new int[]{0}));
-        virtualRegisters.add(new Register("IP", 2, new int[]{0, 1}));
-        virtualRegisters.add(new Register("R", 4, new int[]{0, 0, 0, 0}));
-        virtualRegisters.add(new Register("SP", 2, new int[]{0, 0}));
+        vRegisters.add(new Register("IR", 2, new int[]{0, 0}));
+        vRegisters.add(new Register("SF", 1, new int[]{0}));
+        vRegisters.add(new Register("DF", 1, new int[]{0}));
+        vRegisters.add(new Register("IP", 2, new int[]{0, 1}));
+        vRegisters.add(new Register("R", 4, new int[]{0, 0, 0, 0}));
+        vRegisters.add(new Register("SP", 2, new int[]{0, 0}));
     }
     
     public void push(){
-        int address = ((virtualRegisters.get(V_SP).getValue()[0])*16)+ virtualRegisters.get(V_SP).getValue()[1];
-        OS2.ram.words[address] = virtualRegisters.get(V_R).getValue();
-        virtualRegisters.get(V_SP).setNumber(virtualRegisters.get(V_SP).getNumber()+1);
+        int address = ((vRegisters.get(V_SP).getValue()[0])*16)+ vRegisters.get(V_SP).getValue()[1];
+        OS2.ram.words[address] = vRegisters.get(V_R).getValue();
+        vRegisters.get(V_SP).setNumber(vRegisters.get(V_SP).getNumber()+1);
     }
     
     public void pop(){
-        int address = ((virtualRegisters.get(V_SP).getValue()[0])*16)+ virtualRegisters.get(V_SP).getValue()[1];
-        virtualRegisters.get(V_R).setValue(OS2.ram.words[address]);
-        virtualRegisters.get(V_SP).setNumber(virtualRegisters.get(V_SP).getNumber()-1);
+        int address = ((vRegisters.get(V_SP).getValue()[0])*16)+ vRegisters.get(V_SP).getValue()[1];
+        vRegisters.get(V_R).setValue(OS2.ram.words[address]);
+        vRegisters.get(V_SP).setNumber(vRegisters.get(V_SP).getNumber()-1);
     }
     
     public void doAddition(){
-        int address = ((virtualRegisters.get(V_SP).getValue()[0])*16)+ virtualRegisters.get(V_SP).getValue()[1];
+        int address = ((vRegisters.get(V_SP).getValue()[0])*16)+ vRegisters.get(V_SP).getValue()[1];
         int x = toNumber(OS2.ram.words[address]);
         int y = toNumber(OS2.ram.words[address-1]);
-        OS2.ram.words[address-1] = toArray(x+y);
-        virtualRegisters.get(V_SP).setNumber(virtualRegisters.get(V_SP).getNumber()-1);        
+        OS2.ram.words[address-1] = toArray(y+x);
+        vRegisters.get(V_SP).setNumber(vRegisters.get(V_SP).getNumber()-1);        
+    }
+    
+    public void doSubtraction(){
+        int address = ((vRegisters.get(V_SP).getValue()[0])*16)+ vRegisters.get(V_SP).getValue()[1];
+        int x = toNumber(OS2.ram.words[address]);
+        int y = toNumber(OS2.ram.words[address-1]);
+        OS2.ram.words[address-1] = toArray(y-x);
+        vRegisters.get(V_SP).setNumber(vRegisters.get(V_SP).getNumber()-1);        
+    }
+    
+    public void doMultiplication(){
+        int address = ((vRegisters.get(V_SP).getValue()[0])*16)+ vRegisters.get(V_SP).getValue()[1];
+        int x = toNumber(OS2.ram.words[address]);
+        int y = toNumber(OS2.ram.words[address-1]);
+        OS2.ram.words[address-1] = toArray(y*x);
+        vRegisters.get(V_SP).setNumber(vRegisters.get(V_SP).getNumber()-1);        
     }
     
     public int toNumber(int[] x){
