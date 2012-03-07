@@ -6,3 +6,4 @@ public class OS2 {
         RAM R = new RAM();
     }
 }
+//komentaras
