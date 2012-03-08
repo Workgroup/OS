@@ -16,6 +16,10 @@ public class CPU {
     static final int SI = 10;
     static final int TI = 11;
     static final int TIME = 12;
+    
+    static final int DS = 0;
+    static final int CS = 1;
+    static final int SS = 2;
         
     static final int INTERUPT_TYPE = 3;
     static final int PROGRAM_INT = 0;
@@ -36,8 +40,8 @@ public class CPU {
     public ChannelingDevice channelingDevice = new ChannelingDevice();
     
     public CPU(){    
-        registers.add(new Register("PTR", 2, new int[]{18, 1}));
-        registers.add(new Register("PTT", 2, new int[]{19, 1}));
+        registers.add(new Register("PTR", 2, new int[]{17, 0}));
+        registers.add(new Register("PTT", 2, new int[]{18, 0}));
         registers.add(new Register("IR", 2, new int[]{0, 0}));
         registers.add(new Register("SF", 1, new int[]{0}));
         registers.add(new Register("DF", 1, new int[]{0}));
@@ -124,5 +128,60 @@ public class CPU {
         registers.get(R).setValue(registers.get(R).getDefaultValue());
         registers.get(SP).setValue(registers.get(SP).getDefaultValue());
         registers.get(PTT).setValue(registers.get(PTT).getDefaultValue());
+    }
+    
+    public void createVirtualMahine(){
+        int address = registers.get(PTR).getValue()[2]*16;
+        int machineNumber = 0;
+        for(int i=0; i<16; i++){
+            if(machineNumber < OS2.ram.words[address + i][0]){
+                machineNumber = OS2.ram.words[address + i][0];
+            }
+        }
+        machineNumber = machineNumber + 1;
+        for(int i=0; i<16; i++){
+            if(OS2.ram.words[address + i][0] == 0){
+                OS2.ram.words[address + i][0] = machineNumber;
+                OS2.ram.words[address + i][1] = SS;
+                OS2.ram.words[address + i][2] = i;
+                i = 15;
+            }
+        }
+        for(int i=0; i<16; i++){
+            if(OS2.ram.words[address + i][0] == 0){
+                OS2.ram.words[address + i][0] = machineNumber;
+                OS2.ram.words[address + i][1] = DS;
+                OS2.ram.words[address + i][2] = i;
+                i = 15;
+            }
+        }
+        for(int i=0; i<16; i++){
+            if(OS2.ram.words[address + i][0] == 0){
+                OS2.ram.words[address + i][0] = machineNumber;
+                OS2.ram.words[address + i][1] = CS;
+                OS2.ram.words[address + i][2] = i;
+                i = 15;
+            }
+        }
+        for(int i=0; i<16; i++){
+            if(OS2.ram.words[address + i][0] == 0){
+                OS2.ram.words[address + i][0] = machineNumber;
+                OS2.ram.words[address + i][1] = CS;
+                OS2.ram.words[address + i][2] = i;
+                i = 15;
+            }
+        }
+        if(machineNumber == 1){
+            VirtualMachine vm1 = new VirtualMachine(machineNumber);
+        }
+        if(machineNumber == 2){
+            VirtualMachine vm2 = new VirtualMachine(machineNumber);
+        }
+        if(machineNumber == 3){
+            VirtualMachine vm3 = new VirtualMachine(machineNumber);
+        }
+        if(machineNumber == 4){
+            VirtualMachine vm4 = new VirtualMachine(machineNumber);
+        }
     }
 }

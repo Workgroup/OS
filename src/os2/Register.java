@@ -52,20 +52,20 @@ public class Register {
     
     public int getNumber(){
         int number;
-        number = value[3]+(value[2]*256)+(value[1]*65536)+(value[0]*16777216);
+        number = value[3]+(value[2]*128)+(value[1]*32768)+(value[0]*8388608);
         return number;
     }
     
     public void setNumber(int number){
         int i;
-        i = number / 16777216;
-        number = number - (i*16777216);
+        i = number / 8388608;
+        number = number - (i*8388608);
         value[0] = i;
-        i = number / 65536;
-        number = number -(i*65536);
+        i = number / 32768;
+        number = number -(i*32768);
         value[1] = i;
-        i = number / 256;
-        number = number - (i*256);
+        i = number / 128;
+        number = number - (i*128);
         value[2] = i;
         value[3] = number;
     }

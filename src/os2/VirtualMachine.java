@@ -11,9 +11,11 @@ public class VirtualMachine {
     static final int V_R = 4;
     static final int V_SP = 5;
     
+    public int virtualMachineNumber;
     public ArrayList<Register> vRegisters = new ArrayList<Register>();
     
-    public VirtualMachine(){
+    public VirtualMachine(int x){
+        virtualMachineNumber = x;
         vRegisters.add(new Register("IR", 2, new int[]{0, 0}));
         vRegisters.add(new Register("SF", 1, new int[]{0}));
         vRegisters.add(new Register("DF", 1, new int[]{0}));
@@ -76,6 +78,10 @@ public class VirtualMachine {
     
     public void doNegative(){
         vRegisters.get(V_R).setNumber(0-vRegisters.get(V_R).getNumber());
+    }
+    
+    public void loadSymbolsToR(int x, int y){
+        vRegisters.get(V_R).setValue(OS2.pagesDevice.getVirtualRamValue(virtualMachineNumber, "DS", x, y));
     }
     
     public int toNumber(int[] x){
