@@ -58,6 +58,26 @@ public class VirtualMachine {
         vRegisters.get(V_SP).setNumber(vRegisters.get(V_SP).getNumber()-1);        
     }
     
+    public void doDivision(){
+        int address = ((vRegisters.get(V_SP).getValue()[0])*16)+ vRegisters.get(V_SP).getValue()[1];
+        int x = toNumber(OS2.ram.words[address]);
+        int y = toNumber(OS2.ram.words[address-1]);
+        OS2.ram.words[address-1] = toArray(y/x);
+        vRegisters.get(V_SP).setNumber(vRegisters.get(V_SP).getNumber()-1);        
+    }
+    
+    public void doModul(){
+        int address = ((vRegisters.get(V_SP).getValue()[0])*16)+ vRegisters.get(V_SP).getValue()[1];
+        int x = toNumber(OS2.ram.words[address]);
+        int y = toNumber(OS2.ram.words[address-1]);
+        OS2.ram.words[address-1] = toArray(y%x);
+        vRegisters.get(V_SP).setNumber(vRegisters.get(V_SP).getNumber()-1);        
+    }
+    
+    public void doNegative(){
+        vRegisters.get(V_R).setNumber(0-vRegisters.get(V_R).getNumber());
+    }
+    
     public int toNumber(int[] x){
         int number;
         number = x[3]+(x[2]*256)+(x[1]*65536)+(x[0]*16777216);
