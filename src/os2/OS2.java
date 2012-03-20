@@ -18,5 +18,7 @@ public class OS2 {
         pagesDevice = new PagesDevice();
         input = new Input();
         output = new Output();
+        OS2 os = new OS2();
+        GUI gui = new GUI(os);
     }
 }
