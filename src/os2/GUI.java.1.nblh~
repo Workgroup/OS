@@ -3,7 +3,6 @@ package os2;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
@@ -31,8 +31,7 @@ public class GUI extends MouseAdapter implements ActionListener {
     private JFrame mainWindow;
     private JPanel mainUp, mainDown, mainUpFirst, mainUpSecond, mainUpThird,
             mainUpFourth, mainUpFifth, mainDownFirst, mainDownSecond,
-            mainUpSecondUp, mainUpSecondDown, mainUpFifthUp, mainUpFifthDown,
-            ramTablePanel;
+            mainUpSecondUp, mainUpSecondDown, mainUpFifthUp, mainUpFifthDown;
     private JList virtualMachinesJList;
     private JTable ramTable, virtualRamTable;
     private Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -54,23 +53,7 @@ public class GUI extends MouseAdapter implements ActionListener {
         virtualRegistersTA = new JTextArea();
         inputTA = new JTextArea(1, 15);
         outputTA = new JTextArea();
-        
-        Object[][] ramTableData;
-        ramTableData = new Object[32][17];
-        for (int i = 0; i < 32; i++){
-            for (int j = 0; j < 17; j++){
-                if(j==0){
-                    ramTableData[i][j] = Integer.toString(i);
-                } else {
-                    ramTableData[i][j] = OS2.ram.getStringValueAt(i, j-1);
-                } 
-            }
-        }
-        
-        String[] ramTableColNames = {"","0","1","2","3","4","5","6","7","8","9","10",
-            "11","12","13","14","15"};
-                    
-        ramTable = new JTable(ramTableData, ramTableColNames);
+        ramTable = new JTable(26, 17);
         virtualRamTable = new JTable(17, 9);
         
         inputL.setPreferredSize(new Dimension(430, 20));
@@ -90,24 +73,20 @@ public class GUI extends MouseAdapter implements ActionListener {
         virtualRegistersTA.setBackground(new Color(238, 238, 238));
         virtualRegistersTA.setBorder(new LineBorder(new Color(0, 0, 0), 1));
         inputTA.setPreferredSize(new Dimension(430, 20));
-        Font myFont = new Font("Verdana", Font.BOLD, 12);
-        inputTA.setFont(myFont);
-        inputTA.setForeground(Color.WHITE);
-        inputTA.setBackground(Color.BLACK);
+        inputTA.setBorder(new LineBorder(new Color(0, 0, 0), 1));
         outputTA.setPreferredSize(new Dimension(430, 150));
-        outputTA.setFont(myFont);
-        outputTA.setForeground(Color.WHITE);
-        outputTA.setBackground(Color.BLACK);
+        outputTA.setBorder(new LineBorder(new Color(0, 0, 0), 1));
         
-        ramTable.setSize(new Dimension(640, 450));
-        JScrollPane ramTableScrollPane = new JScrollPane(ramTable);
-        ramTableScrollPane.setPreferredSize(new Dimension(640, 370));
-        JTableHeader header = ramTable.getTableHeader();
-        header.setBackground(Color.yellow);
-        TableColumn column = null;        
-        column = ramTable.getColumnModel().getColumn(0);
+        ramTable.setPreferredSize(new Dimension(640, 468));
+        JScrollPane scrollPane = new JScrollPane(ramTable);
         ramTable.setFillsViewportHeight(true);
-        ramTable.setBorder(new LineBorder(new Color(0, 0, 0), 1));
+        ramTable.setBorder(new LineBorder(new Color(0, 0, 0), 1)); 
+        for(int i = 0; i<22; i++){
+            ramTable.setValueAt(i, i+1, 0);
+        }
+        for(int i = 0; i<16; i++){
+            ramTable.setValueAt(i, 0, i+1);
+        }
         
         virtualRamTable.setPreferredSize(new Dimension(365, 272));
         virtualRamTable.setBorder(new LineBorder(new Color(0, 0, 0), 1));
@@ -134,9 +113,9 @@ public class GUI extends MouseAdapter implements ActionListener {
         
         //--- MAIN DOWN FIRST PANEL ---
         mainDownFirst = new JPanel();
-        mainDownFirst.setPreferredSize(new Dimension(680, 400));
+        mainDownFirst.setPreferredSize(new Dimension(680, 430));
         mainDownFirst.add(ramL, BorderLayout.PAGE_START);
-        mainDownFirst.add(ramTableScrollPane, BorderLayout.PAGE_END);
+        mainDownFirst.add(scrollPane, BorderLayout.PAGE_END);
         
          //--- MAIN UP FIFTH DOWN PANEL ---
         mainUpFifthDown = new JPanel();
